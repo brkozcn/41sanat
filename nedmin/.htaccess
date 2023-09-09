@@ -1,0 +1,55 @@
+RewriteEngine On
+
+
+#RewriteCond %{HTTP_HOST} ^41sanat.com.tr [NC],
+#RewriteRule ^(.*)$ http://www.41sanat.com.tr/$1 [L,R=301,NC]
+
+
+#DOMAİN ALININCA EKLENECENK
+#ErrorDocument 404 http://localhost/41sanat.com/404.php
+
+# RewriteRule ^netting/(.*) - [F]
+DirectoryIndex login.php
+RewriteRule ^root$ ./index.php [NC,L]
+
+RewriteRule ^login$ ./login.php [NC,L]  
+RewriteRule ^logout$ ./logout.php [NC,L]  
+
+RewriteRule ^about$ ./hakkimizda.php [NC,L]  
+
+RewriteRule ^settings$ ./genel-ayarlar.php [NC,L]  
+
+RewriteRule ^contactus$ ./iletisim.php [NC,L]  
+
+RewriteRule ^api$ ./api.php [NC,L]  
+
+RewriteRule ^social$ ./sosmed-ayar.php [NC,L]  
+
+RewriteRule ^mail$ ./mail-ayar.php [NC,L]  
+
+RewriteRule ^slider$ ./slider.php [NC,L]  
+
+RewriteRule ^slider-add$ ./slider-ekle.php [NC,L]  
+
+RewriteRule ^slider-edit$ ./slider-duzenle.php [NC,L]  
+
+RewriteRule ^content$ ./icerik.php [NC,L]  
+
+RewriteRule ^content-add$ ./icerik-ekle.php [NC,L]  
+
+RewriteRule ^content-edit$ ./icerik-duzenle.php [NC,L]  
+
+RewriteRule ^menu$ ./menu.php [NC,L]  
+
+RewriteRule ^menu-edit$ ./menu-duzenle.php [NC,L]  
+
+RewriteRule ^menu-add$ ./menu-ekle.php [NC,L]  
+
+RewriteRule ^profile$ ./profile.php [NC,L]  
+RewriteRule ^profile$ ./profile.php [NC,L]  
+RewriteRule ^profile$ ./profile.php [NC,L]  
+
+
+RewriteRule ^menu-duzenle-([0-9]+)$ menu-duzenle.php?menu_id=$1 [L,QSA]
+RewriteRule ^slider-edit-([0-9]+)$ slider-duzenle.php?slider_id=$1 [L,QSA]
+RewriteRule ^content-edit-([0-9]+)$ icerik-edit.php?icerik_id=$1 [L,QSA]

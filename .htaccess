@@ -1,0 +1,59 @@
+# [NC] Non Case -> Büyük küçük harfe bakmaz
+# [OR] Or -> Veya sonra aşagıya bakar
+# [R=xxx] Redict -> Yönlendirme
+# [L]  -> BU işlemden sonra dur
+# [F] Forbidden -> Yasaklı
+# (.*) -> Ne olursa olsun
+#RewriteCond -> İf gibi
+#RewriteRule -> if altındaki kodlar
+RewriteEngine On
+
+
+#RewriteCond %{HTTP_HOST} ^41sanat.com [NC],
+#RewriteRule ^(.*)$ https://www.41sanat.com/$1 [L,R=301,NC]
+#RewriteCond %{HTTP_REFERER} !^$
+#RewriteCond %{HTTP_REFERER} !^https://(www\.)41sanat.com/.*$ [NC]
+#RewriteRule \.(gif|jpg|jpeg|png|bmp|zir|rar|php|mp3|mp4|xml|css|pdf|sql|js|ico)$ -[F]
+
+RewriteCond %{HTTP:X-Forwarded-Proto} !https
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP:CF-Visitor} !{"scheme":"https"}
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+
+
+
+
+ErrorDocument 404 http://41sanat.com/404
+# Options -Indexes
+
+# Url Gizleme
+RewriteRule ^search$ search.php [NC,L]
+RewriteRule ^404$ 404.php [NC,L]
+RewriteRule ^hakkimizda$ about.php [NC,L]
+RewriteRule ^calismalarimiz$ case-studies.php [NC,L]
+RewriteRule ^blog$ blog.php [NC,L]
+RewriteRule ^iletisim$ contact.php [NC,L]
+RewriteRule ^sitemap.xml$ sitemap.php [NC,L]
+
+# Admin Url Gizleme
+#RewriteRule ^admin$ redicertnedmin.php [NC,L]
+#RewriteRule ^admin/(.*)$ nedmin/$1 [NC,L]
+#RewriteRule ^admin/(.*)/(.*)$ nedmin/$1/$2 [NC,L]
+#RewriteRule ^admin/(.*)/(.*)/(.*)$ nedmin/$1/$2/$3 [NC,L]
+#RewriteRule ^admin/logout$ nedmin/logout.php [NC,L]
+
+# Forbbiden
+
+RewriteRule ^nedmin/netting - [NC,F] 
+RewriteRule ^admin/netting - [NC,F] 
+
+
+RewriteRule ^blog-([0-9a-zA-Z-_]+)-([0-9]+)$   blog-detay.php?sef=$1&icerik_id=$2 [L,QSA]
+RewriteRule ^menu-([0-9a-zA-Z-_]+)-([0-9]+)$ menu-detay.php?sef=$1&menu_id=$2 [L,QSA]
+
+
+
+#RewriteRule ^urunler-([0-9a-zA-Z-_]+)-([0-9]+)$ urunler.php?sef=$1&urun_id=$2 [L,QSA]
+#RewriteRule ^kategoriler-([0-9a-zA-Z-_]+) kategoriler.php?sef=$1 [L,QSA]
+#RewriteRule ^urun-detay-([0-9a-zA-Z-_]+)-([0-9]+)$ urun-detay.php?sef=$1&durum_id=$2 [L,QSA]
